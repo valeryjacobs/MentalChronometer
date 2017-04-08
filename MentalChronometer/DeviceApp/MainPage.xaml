@@ -16,6 +16,7 @@
             <TextBlock Text="Button 22: " />
             <TextBlock Text="Leds: " />
             <TextBlock Text="Analog: " />
+            <Button Click="Button_Click"></Button>
         </StackPanel>
         <StackPanel>
             <TextBlock Name="LightTextBox" />

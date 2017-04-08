@@ -28,7 +28,7 @@ namespace DeviceApp
         private DispatcherTimer timer;
         private bool next;
         private int i;
-        private const string signalRHub = "http://localhost:4361/";
+        private const string signalRHub = "http://mentalchronometer.azurewebsites.net/";
         private const string signalRHubProxy = "MentalChronometerHub";
         private string _connectionid = "";
         private const string _piID = "Pi01";
@@ -37,7 +37,7 @@ namespace DeviceApp
         {
             this.InitializeComponent();
 
-           this.Setup();
+         //  this.Setup();
         }
 
         private async void Setup()
@@ -49,18 +49,18 @@ namespace DeviceApp
 
             hubConnection.Start().Wait();
             _connectionid = hubConnection.ConnectionId;
-            //chat.Invoke<string>("Register", _piID);
+           // chat.Invoke<string>("Register", _piID);
 
 
-            //this.hat = await GIS.FEZHAT.CreateAsync();
+            this.hat = await GIS.FEZHAT.CreateAsync();
 
-            //this.hat.S1.SetLimits(500, 2400, 0, 180);
-            //this.hat.S2.SetLimits(500, 2400, 0, 180);
+            this.hat.S1.SetLimits(500, 2400, 0, 180);
+            this.hat.S2.SetLimits(500, 2400, 0, 180);
 
-            //this.timer = new DispatcherTimer();
-            //this.timer.Interval = TimeSpan.FromMilliseconds(100);
-            //this.timer.Tick += Timer_Tick;
-            //this.timer.Start();
+            this.timer = new DispatcherTimer();
+            this.timer.Interval = TimeSpan.FromMilliseconds(100);
+            this.timer.Tick += Timer_Tick;
+            this.timer.Start();
         }
 
         private async void HandleEvent(string payload)
@@ -129,6 +129,11 @@ namespace DeviceApp
                     this.hat.MotorB.Speed = 0.0;
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Setup();
         }
     }
 }
